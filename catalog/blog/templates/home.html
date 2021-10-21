@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Home Page</title>
+</head>
+<body>
+
+<h1>This is my Blog</h1>
+
+    <ul>
+        {% for post in object_list %}
+            <li> {{ post.title }} - {{ post.author }} <br/> {{ post.body }} </li>
+        {%endfor%}
+    </ul>
+</body>
+</html>
