@@ -12,6 +12,7 @@ class Post(models.Model):
     publishing_date = models.DateTimeField(verbose_name='Yayımlanma Tarihi', auto_now_add=True)
     image = models.ImageField(null=True, blank=True)
     slug = models.SlugField(unique=True, editable=False, max_length=130)
+    category = models.ForeignKey('post.Category', on_delete=models.CASCADE, related_name='posts', verbose_name='Kategori')
 
     def __str__(self):
         return self.title
@@ -58,3 +59,26 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, editable=False, max_length=130)
+
+    def get_unique_slug(self):
+        slug = slugify(self.name.replace('ı', 'i'))
+        unique_slug = slug
+        counter = 1
+        while Category.objects.filter(slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, counter)
+            counter += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        self.slug = self.get_unique_slug()
+        return super(Category, self).save(*args, **kwargs)
+
+
+
+    def __str__(self):
+        return self.name
+

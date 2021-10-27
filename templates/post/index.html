@@ -15,6 +15,8 @@
                             </div>
                             <h3>{{ post.title }}</h3>
                             <small>{{ post.user.get_full_name }} tarafından {{ post.publishing_date|timesince }} önce yazıldı</small>
+                            <br/>
+                            <small>Kategori: <a href="{% url 'post:index' %}?kategori={{post.category.slug}} ">{{post.category.name}}</a> </small>
                             <p>{{ post.content|safe|linebreaks|truncatechars:150 }}</p>
                             <p>
                                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">İncele</a>
@@ -36,13 +38,13 @@
                 <div class="pagination">
                     <span class="step-links">
                         {% if posts.has_previous %}
-                        <a href="?sayfa={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">önceki</a>
+                        <a href="?sayfa={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.kategori %}&kategori={{ request.GET.kategori }}{% endif %}">önceki</a>
                         {% endif %}
                         <span class="current">
                             Sayfa {{ posts.number }} / {{ posts.paginator.num_pages }}.
                         </span>
                         {% if posts.has_next %}
-                        <a href="?sayfa={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">sonraki</a>
+                        <a href="?sayfa={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.kategori %}&kategori={{ request.GET.kategori }}{% endif %}">sonraki</a>
                         {% endif %}
                     </span>
                 </div>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Anasayfa - {{ block.super }}{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <h2> Kategoriler </h2>
+
+        {% for category in category_list %}
+        <ul>
+            <li>
+                <a href="{% url 'post:index' %}?kategori={{category.slug}} ">{{category.name}}</a>
+            </li>
+        </ul>
+        {% endfor %}
+
+
+    </div>
+
+
+{% endblock %}

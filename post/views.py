@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect, Http404
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.utils.text import slugify
@@ -10,6 +10,7 @@ from django.db.models import Q
 def post_index(request):
     post_list = Post.objects.all()
     query = request.GET.get('q')
+    category = request.GET.get('kategori')
 
     if query:
         post_list = post_list.filter(
@@ -18,6 +19,9 @@ def post_index(request):
             Q(user__first_name__icontains=query) |
             Q(user__last_name__icontains=query)
         ).distinct()
+    elif category:
+        post_list = post_list.filter(category__slug__icontains=category)
+
 
     paginator = Paginator(post_list, 5)  # Show 5 posts per page.
 
@@ -32,6 +36,12 @@ def post_index(request):
         posts = paginator.get_page(paginator.num_pages)
 
     return render(request, 'post/index.html', {'posts': posts})
+
+
+def category_view(request):
+    category_list = Category.objects.all()
+
+    return render(request, 'post/category.html', {'category_list': category_list})
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
