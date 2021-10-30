@@ -3,7 +3,7 @@ from .models import Post, Comment, Category
 
 class PostAdmin(admin.ModelAdmin):
 
-    list_display = ['title', 'category', 'publishing_date', 'slug']
+    list_display = ['title', 'user', 'category', 'publishing_date', 'slug']
     list_display_links = ['title', 'publishing_date']
     list_filter = ['publishing_date', 'category']
     search_fields = ['title', 'content']
