@@ -52,10 +52,12 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('post.Post', related_name='comments', on_delete=models.CASCADE, verbose_name='Gönderi')
-    name = models.CharField(max_length=200, verbose_name='İsim')
+    author = models.ForeignKey('auth.User', related_name='comments', on_delete=models.CASCADE, verbose_name='Yazar')
+    name = models.CharField(max_length=200, verbose_name='Başlık')
     content = models.TextField(verbose_name='Yorum')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
     is_approved = models.BooleanField(default=False, verbose_name='Onay Durumu')
+
 
     def __str__(self):
         return self.content

@@ -50,6 +50,7 @@ def post_detail(request, slug):
     if form.is_valid():
         comment = form.save(commit=False)
         comment.post = post
+        comment.author = request.user
         comment.save()
         messages.success(request, 'Yorumunuz yönetici tarafından onaylandıktan sonra yayınlanacaktır.', extra_tags='yorum-basarili')
         return HttpResponseRedirect(post.get_absolute_url())

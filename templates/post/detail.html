@@ -29,9 +29,13 @@
                         </div>
                     </div>
 
-                    <br/><br/><hr/>
+                    <br/>
                     <h3>Yorum Ekle:</h3>
-                    {% include 'post/comment.html' %}
+                    {% if request.user.is_authenticated %}
+                        {% include 'post/comment.html' %}
+                    {% else %}
+                        <p>Yorum yapmak için <a href="{% url 'accounts:login' %}">üye girişi</a> yapmanız gerekmektedir.</p>
+                    {% endif %}
                     <hr/>
 
                     {% for comment in post.comments.all %}

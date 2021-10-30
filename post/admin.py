@@ -17,7 +17,8 @@ class CommentAdmin(admin.ModelAdmin):
     class Meta:
         model = Comment
 
-    list_display = ['name', 'post', 'content', 'created_date', 'is_approved']
+    list_display = ['name', 'author', 'post', 'content', 'created_date', 'is_approved']
+    list_filter = ['is_approved', 'created_date']
 
 
 admin.site.register(Comment, CommentAdmin)
