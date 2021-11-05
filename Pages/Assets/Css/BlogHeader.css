@@ -1,0 +1,88 @@
+/*
+    <!--------------------------------------
+    HEADER
+    --------------------------------------->
+*/
+header {
+  background-color: rgb(169, 192, 236);
+  max-width: 1100px;
+  height: 75px;
+  margin: 0 auto;
+}
+.navbar .brand {
+  color: #fff;
+  font-size: 1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  height: 75px;
+  padding: 0 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .navigation {
+  position: relative;
+}
+
+header .navigation .navigation-items a {
+  position: relative;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: 0.3s ease;
+  padding: 5px 0;
+}
+
+header .navigation .navigation-items a:before {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s ease;
+}
+
+header .navigation .navigation-items a:hover:before {
+  width: 100%;
+}
+
+header .auth-buttons {
+  position: relative;
+  right: 150px;
+}
+header .auth-buttons .navigation-items a {
+  position: relative;
+
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  transition: 0.3s ease;
+  margin-left: 20px;
+
+  padding: 5px 0;
+  font-weight: 500;
+}
+
+header .auth-buttons .navigation-items a:before {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s ease;
+}
+
+header .auth-buttons .navigation-items a:hover:before {
+  width: 100%;
+}
