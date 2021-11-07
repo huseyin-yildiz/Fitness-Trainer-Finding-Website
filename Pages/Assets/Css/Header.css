@@ -5,14 +5,16 @@ header {
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 200px;
+  padding: 15px 20px;
   transition: 0.5s ease;
 }
 
+header .navigation {
+  position: relative;
+}
+
 header .brand {
-  position: absolute;
   left: 10px;
   color: #fff;
   font-size: 1.5em;
@@ -20,13 +22,10 @@ header .brand {
   text-transform: uppercase;
   text-decoration: none;
 }
-
-header .navigation {
+header .navigation .navigation-items {
   position: relative;
 }
-
 header .navigation .navigation-items a {
-  position: relative;
   color: #fff;
   font-size: 1em;
   font-weight: 500;
@@ -51,8 +50,7 @@ header .navigation .navigation-items a:hover:before {
 }
 
 header .auth-buttons {
-  position: relative;
-  right: 80px;
+  margin-left: 20px;
 }
 header .auth-buttons .navigation-items a {
   position: relative;
@@ -85,9 +83,6 @@ header .auth-buttons .navigation-items a:hover:before {
     padding: 12px 20px;
   }
   header .auth-buttons {
-    position: relative;
-    left: 0px;
-    top: 0px;
   }
 
   header .navigation {
@@ -132,7 +127,7 @@ header .auth-buttons .navigation-items a:hover:before {
 
   .menu-btn {
     position: absolute;
-    background: url(/Assets/Images/menu.png) no-repeat;
+    background: url(../Assets/Images/menu.png) no-repeat;
     background-size: 30px;
     background-position: center;
     width: 40px;
@@ -145,7 +140,7 @@ header .auth-buttons .navigation-items a:hover:before {
 
   .menu-btn.active {
     z-index: 999;
-    background: url(/Assets/Images/close.png) no-repeat;
+    background: url(../Assets/Images/close.png) no-repeat;
     background-size: 25px;
     background-position: center;
     transition: 0.3s ease;

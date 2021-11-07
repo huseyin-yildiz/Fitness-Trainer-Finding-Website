@@ -1,13 +1,35 @@
 <html>
   <head>
     <title>Auhtentcation Page</title>
-    <link rel="stylesheet" href="/Assets/Css/Authentication.css" />
-    <link rel="stylesheet" href="/Assets/Css/Header.css"/>
+    <link rel="stylesheet" href="./Assets/Css/Authentication.css" />
+    <link rel="stylesheet" href="./Assets/Css/Header.css" />
 
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     />
+
+    <style>
+      .fa-star {
+        opacity: 0.3;
+        color: cadetblue;
+      }
+      .checked {
+        opacity: 1;
+        color: blue;
+      }
+      html {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)
+          ),
+          url(./Assets/Images/uJOcAr.jpg);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
   </head>
 
   <body>
@@ -17,7 +39,7 @@
         <div class="navigation-items">
           <a href="#">Log In</a>
           <a href="#">Sing Up</a>
-          <a href="#" style='font-size:24px' class='far'>&#xf2bd;</a>
+          <a href="#" style="font-size: 24px" class="far">&#xf2bd;</a>
         </div>
       </div>
       <div class="menu-btn"></div>
@@ -30,68 +52,50 @@
           <a href="#">Contact</a>
         </div>
       </div>
-
     </header>
 
-    <div class="hero">
-      <div class="form-box">
-        <div class="button-box">
-          <div id="btn"></div>
-          <button type="button" class="toggle-btn" onclick="login()">
-            Log In
-          </button>
-          <button type="button" class="toggle-btn" onclick="register()">
-            Register
-          </button>
-        </div>
-        <div class="media-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <form id="login" class="input-group">
-          <input
-            type="text"
-            class="input-field"
-            placeholder="User Id"
-            required
-          />
-          <input
-            type="text"
-            class="input-field"
-            placeholder="Enter Password"
-            required
-          />
-          <input type="checkbox" class="check-box" required /><span
-            >Remember Password</span
-          >
-          <button type="submit" class="submit-btn">Login</button>
-        </form>
-        <form id="register" class="input-group">
-          <input
-            type="text"
-            class="input-field"
-            placeholder="User Id"
-            required
-          />
-          <input
-            type="text"
-            class="input-field"
-            placeholder="E-mail"
-            required
-          />
-          <input
-            type="text"
-            class="input-field"
-            placeholder="Enter Password"
-            required
-          />
-          <input type="checkbox" class="check-box" required /><span
-            >I agree to the terms & conditions</span
-          >
-          <button type="submit" class="submit-btn">Register</button>
-        </form>
+    <div class="form-box">
+      <div class="button-box">
+        <div id="btn"></div>
+        <button type="button" class="toggle-btn" onclick="login()">
+          Log In
+        </button>
+        <button type="button" class="toggle-btn" onclick="register()">
+          Register
+        </button>
       </div>
+      <div class="media-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+      <form id="login" class="input-group">
+        <input type="text" class="input-field" placeholder="User Id" required />
+        <input
+          type="text"
+          class="input-field"
+          placeholder="Enter Password"
+          required
+        />
+        <input type="checkbox" class="check-box" required /><span
+          >Remember Password</span
+        >
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+      <form id="register" class="input-group">
+        <input type="text" class="input-field" placeholder="User Id" required />
+        <input type="text" class="input-field" placeholder="E-mail" required />
+        <input
+          type="text"
+          class="input-field"
+          placeholder="Enter Password"
+          required
+        />
+        <input type="checkbox" class="check-box" required /><span
+          >I agree to the terms & conditions</span
+        >
+        <button type="submit" class="submit-btn">Register</button>
+      </form>
     </div>
 
     <script>
