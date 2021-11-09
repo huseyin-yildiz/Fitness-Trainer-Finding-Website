@@ -1,0 +1,23 @@
+<!--------------------------------------
+    HEADER
+    --------------------------------------->
+<header>
+  <div class="navbar">
+    <a href="{% url 'home' %}" class="brand">Logo</a>
+    <div class="auth-buttons">
+      <div class="navigation-items">
+        <a href="{% url 'accounts:login' %}">Log In</a>
+        <a href="{% url 'accounts:register' %}">Sign Up</a>
+        <a href="#" style="font-size: 24px" class="far">&#xf2bd;</a>
+      </div>
+    </div>
+    <div class="menu-btn"></div>
+    <div class="navigation" style="">
+      <div class="navigation-items">
+        <a style="font-weight: bold" href="{% url 'post:index' %}">Blog</a>
+        <a style="font-weight: bold" href="{% url 'trainer:index' %}">Trainers</a>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- End Header -->
