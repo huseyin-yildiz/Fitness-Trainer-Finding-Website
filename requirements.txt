@@ -1,0 +1,5 @@
+django
+django-ckeditor
+django-crispy-forms
+django-cleanup
+Pillow
