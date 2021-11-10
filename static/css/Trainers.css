@@ -4,21 +4,25 @@
   font-family: sans-serif;
 }
 
-/*
-.hero {
-  height: 100%;
-  width: 100%;
-  background-position: center;
+html {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(../Images/uJOcAr.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  position: absolute;
-}*/
+}
 
-.trainer-blocks {
+.profile-list {
   margin-top: 100px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+}
+
+.trainer-blocks {
+  width: 900px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .trainer-blocks .trainer-blocks-line {

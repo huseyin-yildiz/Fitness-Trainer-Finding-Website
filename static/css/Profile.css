@@ -5,15 +5,15 @@
   font-family: "Poppins", sans-serif;
 }
 
-.hero {
-  height: 100%;
-  width: 100%;
-  background-position: center;
+html {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(/Assets/Images/usenme.jpg);
+    url(../Images/uJOcAr.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  position: absolute;
 }
+
 .profile-box {
   display: flex;
   align-items: center;
