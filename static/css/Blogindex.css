@@ -62,7 +62,7 @@ button {
 */
 .nearby-section {
   max-width: 1140px;
-  height: 375px;
+  height: 500px;
   margin: 0 auto;
 }
 .nearby-section .container {
@@ -107,7 +107,7 @@ button {
 */
 .category-posts-section {
   max-width: 1140px;
-  height: 580px;
+  height: 700px;
   padding-left: 15px;
   padding-right: 15px;
   margin-right: auto;
@@ -125,6 +125,7 @@ button {
   justify-content: space-between;
 }
 .category-posts-section .container .left-side .block {
+  margin-top: 20px;
   display: flex;
 }
 .category-posts-section .container .left-side .block .block-left-side {
