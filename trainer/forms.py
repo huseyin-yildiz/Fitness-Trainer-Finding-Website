@@ -1,5 +1,5 @@
 from django import forms
-from .models import Trainer , Comment
+from .models import Trainer, Comment
 
 class TrainerForm(forms.ModelForm):
 
