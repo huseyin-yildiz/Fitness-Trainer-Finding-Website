@@ -43,7 +43,8 @@ def trainer_update(request, id):
         return Http404()
 
     trainer = get_object_or_404(Trainer, id=id)
-    form = TrainerForm(request.POST or None, request.FILES or None)
+    print(trainer.User_ID)
+    form = TrainerForm(request.POST or None, request.FILES or None, instance=trainer)
     if form.is_valid():
         if request.user == trainer.User_ID:
             form.save()
