@@ -39,6 +39,12 @@
             <h1>
               {{ post.title }}
             </h1>
+            <p>
+                {% if request.user.is_authenticated and request.user == post.user %}
+                                <a href="{{ post.get_update_url }}" class="btn btn-dark" role="button">Güncelle</a>
+                                <a href="{{ post.get_delete_url }}" class="btn btn-danger" role="button">Sil</a>
+                                {% endif %}
+              </p>
             <div class="author-inf">
               <img
                 class="rounded-circle"
@@ -87,6 +93,7 @@
                   >{{ post.title }}</a
                 >
               </h4>
+
               <p>
                 {{ post.content|safe|linebreaks|truncatechars:300 }}
               </p>

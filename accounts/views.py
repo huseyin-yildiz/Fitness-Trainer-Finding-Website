@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm, SignUpForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
+
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -36,6 +38,8 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            group = Group.objects.get(name='customer')
+            user.groups.add(group)
             login(request, user)
             return redirect('home')
     else:
