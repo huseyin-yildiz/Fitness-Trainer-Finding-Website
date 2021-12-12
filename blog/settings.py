@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'post',
     'trainer',
     'feedback',
+    'accounts',
     # 3. Parti uygulamalar
     'crispy_forms',
     'django_cleanup',
