@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models import IntegerField, Model
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 # Create your models here.
 class Trainer(models.Model):
@@ -36,3 +39,27 @@ class Comment(models.Model):
     name = models.CharField(max_length=200, verbose_name='Başlık')
     content = models.TextField(verbose_name='Yorum')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
+
+class CalendarEvent(models.Model):
+    trainer = models.ForeignKey('trainer.Trainer', related_name='calendarevent', on_delete=models.CASCADE, verbose_name='Trainer')
+    day_of_week_dict = [
+        (0, 'Monday'),
+        (1, 'Tuesday'),
+        (2, 'Wednesday'),
+        (3, 'Thursday'),
+        (4, 'Friday'),
+        (5, 'Saturday'),
+        (6, 'Sunday'),
+    ]
+    day_of_week = models.IntegerField(default=0, verbose_name='Day of week', choices=day_of_week_dict)
+    start_time = models.IntegerField(validators=[
+            MaxValueValidator(23),
+            MinValueValidator(0)
+        ])
+
+class Reservation(models.Model):
+    event = models.ForeignKey('trainer.CalendarEvent', related_name='reservation', on_delete=models.CASCADE, verbose_name='Calendar Event')
+    trainer = models.ForeignKey('trainer.Trainer', related_name='reservation', on_delete=models.CASCADE, verbose_name='Trainer')
+    customer = models.ForeignKey('auth.User', related_name='reservation', on_delete=models.CASCADE, blank=True, null=True, verbose_name='User')
+    date_time = models.DateField(auto_now_add=True, verbose_name='Reservation Date')
+
