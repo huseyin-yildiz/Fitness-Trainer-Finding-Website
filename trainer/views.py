@@ -60,3 +60,7 @@ def trainer_update(request, id):
 
 def trainer_delete(request):
     return HttpResponse('Burası trainer delete sayfası')
+
+
+def add_calendar_event(request):
+    return HttpResponse('Burası trainer delete sayfası')
