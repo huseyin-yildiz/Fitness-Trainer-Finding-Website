@@ -43,10 +43,7 @@ INSTALLED_APPS = [
     'trainer',
     'feedback',
     'accounts',
-<<<<<<< HEAD
     'messaging',
-=======
->>>>>>> 6d3d3f74a79710e45ee1a40a333102fe4c0470d2
     # 3. Parti uygulamalar
     'crispy_forms',
     'django_cleanup',
