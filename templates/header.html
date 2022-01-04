@@ -3,25 +3,15 @@
     --------------------------------------->
 <header>
   <div class="navbar">
-    <div class="brand">
-      <div class="logo"><a href=""></a></div>
-    </div>
+    <a href="{% url 'home' %}" class="brand">Logo</a>
     <div class="auth-buttons">
       <div class="navigation-items">
         {% if not request.user.is_authenticated %}
-        <a style="font-weight: bold" href="{% url 'accounts:login' %}"
-          >Log In</a
-        >
-        <a style="font-weight: bold" href="{% url 'accounts:register' %}"
-          >Sign Up</a
-        >
+          <a style="font-weight: bold" href="{% url 'accounts:login' %}">Log In</a>
+          <a style="font-weight: bold" href="{% url 'accounts:register' %}">Sign Up</a>
         {% else %}
-        <a style="font-weight: bold" href="{% url 'accounts:profile' %}"
-          >Profile</a
-        >
-        <a style="font-weight: bold" href="{% url 'accounts:logout' %}"
-          >Log Out</a
-        >
+          <a style="font-weight: bold" href="{% url 'accounts:profile' %}">Profile</a>
+          <a style="font-weight: bold" href="{% url 'accounts:logout' %}">Log Out</a>
         {% endif %}
         <a href="#" style="font-size: 24px" class="far">&#xf2bd;</a>
       </div>
@@ -30,12 +20,9 @@
     <div class="navigation" style="">
       <div class="navigation-items">
         <a style="font-weight: bold" href="{% url 'post:index' %}">Blog</a>
-        <a style="font-weight: bold" href="{% url 'trainer:index' %}"
-          >Trainers</a
-        >
-        <a style="font-weight: bold" href="{% url 'feedback:index' %}"
-          >Feedback</a
-        >
+        <a style="font-weight: bold" href="{% url 'trainer:index' %}">Trainers</a>
+        <a style="font-weight: bold" href="{% url 'feedback:index' %}">Feedback</a>
+        <a style="font-weight: bold" href="{% url 'messaging:index' %}">Messages</a>
       </div>
     </div>
   </div>

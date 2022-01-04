@@ -62,4 +62,3 @@ class Reservation(models.Model):
     trainer = models.ForeignKey('trainer.Trainer', related_name='reservation', on_delete=models.CASCADE, verbose_name='Trainer')
     customer = models.ForeignKey('auth.User', related_name='reservation', on_delete=models.CASCADE, blank=True, null=True, verbose_name='User')
     date_time = models.DateField(auto_now_add=True, verbose_name='Reservation Date')
-
