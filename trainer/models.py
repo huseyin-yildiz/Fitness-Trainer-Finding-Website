@@ -56,10 +56,14 @@ class CalendarEvent(models.Model):
             MaxValueValidator(23),
             MinValueValidator(0)
         ])
+    def __str__(self):
+        return self.trainer.Name + ' ' + self.trainer.Surname + ' | ' + str(self.day_of_week_dict[self.day_of_week][1] ) + ' | ' + str(self.start_time) + ":00"
 
 class Reservation(models.Model):
-    event = models.ForeignKey('trainer.CalendarEvent', related_name='reservation', on_delete=models.CASCADE, verbose_name='Calendar Event')
-    trainer = models.ForeignKey('trainer.Trainer', related_name='reservation', on_delete=models.CASCADE, verbose_name='Trainer')
+    event = models.ForeignKey('CalendarEvent', related_name='reservation', on_delete=models.CASCADE, verbose_name='Calendar Event')
+    trainer = models.ForeignKey('Trainer', related_name='reservation', on_delete=models.CASCADE, verbose_name='Trainer')
     customer = models.ForeignKey('auth.User', related_name='reservation', on_delete=models.CASCADE, blank=True, null=True, verbose_name='User')
-    date_time = models.DateField(auto_now_add=True, verbose_name='Reservation Date')
+    date_time = models.DateField( verbose_name='Reservation Date')
 
+    def __str__(self):
+        return self.customer.get_username() + ' ' + str(self.date_time) + " " + str(self.event.start_time) +":00"

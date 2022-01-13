@@ -43,14 +43,13 @@ INSTALLED_APPS = [
     'trainer',
     'feedback',
     'accounts',
-<<<<<<< HEAD
     'messaging',
-=======
->>>>>>> 6d3d3f74a79710e45ee1a40a333102fe4c0470d2
+
     # 3. Parti uygulamalar
     'crispy_forms',
     'django_cleanup',
     'ckeditor',
+    'djstripe',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +161,10 @@ CKEDITOR_CONFIGS = {
 }
 
 
+#  Dj-Stripe
+
+STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "sk_test_51KEBbjGzcSkS4bfle9OaIvCHj8QnzYb6ayQbsEXjNlf0elI5RZqpi4KxnuQYewQohvevapE3syCWzxpKFudtPeAB002unVYhT6")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51KEBbjGzcSkS4bfle9OaIvCHj8QnzYb6ayQbsEXjNlf0elI5RZqpi4KxnuQYewQohvevapE3syCWzxpKFudtPeAB002unVYhT6")
+STRIPE_LIVE_MODE = False  # Change to True in production
+DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"  # Get it from the section in the Stripe dashboard where you added the webhook endpoint
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"

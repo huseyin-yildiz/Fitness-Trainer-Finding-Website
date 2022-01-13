@@ -1,9 +1,15 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, HttpResponse , get_object_or_404, HttpResponseRedirect, Http404
-from .models import Trainer
+from .models import CalendarEvent, Reservation, Trainer
 from .forms import TrainerForm, CommentForm
 from django.contrib import messages
+from dict2xml import dict2xml
+import datetime
+from django.contrib.auth.decorators import login_required
+
 
 def trainer_index(request):
+    print("here")
     trainers = Trainer.objects.all()
     auth_trainer = None
     if request.user.is_authenticated:
@@ -64,3 +70,87 @@ def trainer_delete(request):
 
 def add_calendar_event(request):
     return HttpResponse('Burası trainer delete sayfası')
+
+
+def is_free_at(trainerId, date, hour):
+    dateS = date.split('-')
+    dayofweek = datetime.date(int(dateS[0]),int(dateS[1]),int(dateS[2])).weekday()
+    
+    isThereTheEvent = CalendarEvent.objects.filter(day_of_week=dayofweek,trainer=trainerId,start_time=hour)
+
+    if(isThereTheEvent):
+        rezervations = Reservation.objects.filter(date_time=date,trainer=trainerId) # id ile query hata hata
+        if(rezervations.exists()):
+            for res in rezervations:
+                print("resssssssssssssS::",res.event.start_time)
+                if(res.event.start_time == hour):
+                    return False
+            return True
+        else:
+            return True
+    else:
+        return False
+    
+
+
+
+def free__lectures(trainerId,date):
+    free_lecs = list()
+
+    for a in range(0,23):
+        isFree = is_free_at(trainerId,date,a)
+        print("is free ",a,":",isFree )
+        if(isFree):
+            free_lecs.append(a)
+    return free_lecs
+
+
+    dateS = date.split('-')
+    print("date::::::",dateS)   
+    dayofweek = datetime.date(int(dateS[0]),int(dateS[1]),int(dateS[2])).weekday()
+    print("dayofweek:",dayofweek)
+    events = CalendarEvent.objects.filter(day_of_week=dayofweek,trainer=trainerId)
+    print("events::",events)
+
+    free__lecs = list()
+    for event in events:
+        print("eve::",event)
+        if(is_free_at(trainerId,date,event.start_time)):
+            free__lecs.append(event)
+            print("eventt:::",event)
+    
+    return free__lecs
+
+
+# Reservation part
+
+
+def reservationInfo(request,id,date):
+
+    free_lecs = free__lectures(id,date)
+    
+    
+    a = [1,2]
+    data = {"free_lecs": free_lecs
+        }
+
+    xml = dict2xml(data)
+    print(xml)
+
+
+
+    return HttpResponse(str(xml))
+
+@login_required
+def reservation(request,id):
+    return render(request, 'trainer/calendar.html')
+
+
+
+@login_required
+def reservate(request,trainerId,customer_id,date,hour):
+    
+    
+    return render(request, 'trainer/calendar.html')
+
+

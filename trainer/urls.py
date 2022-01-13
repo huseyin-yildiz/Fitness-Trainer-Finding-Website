@@ -9,5 +9,7 @@ urlpatterns = [
     path('create/', trainer_create, name='create'),
     re_path(r'^(?P<id>[\w-]+)/update/$', trainer_update, name='update'),
     re_path(r'^(?P<id>[\w-]+)/delete/', trainer_delete, name='delete'),
+    path('reservation/<int:id>', reservation, name='reservation'),
+    path('reservationInfo/<int:id>/<str:date>/', reservationInfo, name='reservationInfo'),
 ]
 
