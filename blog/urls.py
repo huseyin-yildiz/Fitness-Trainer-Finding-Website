@@ -27,6 +27,10 @@ urlpatterns = [
     path('trainer/', include('trainer.urls')),
     path('feedback/', include('feedback.urls')),
     path("stripe/", include("djstripe.urls", namespace="djstripe")),
+    path('messaging/', include('messaging.urls')),
+
+    path('payment/', include('payment.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

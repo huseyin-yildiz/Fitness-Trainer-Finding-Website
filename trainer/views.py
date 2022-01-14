@@ -1,3 +1,4 @@
+from django.db.models.fields import DateField
 from django.db.models.query import QuerySet
 from django.shortcuts import render, HttpResponse , get_object_or_404, HttpResponseRedirect, Http404
 from .models import CalendarEvent, Reservation, Trainer
@@ -146,11 +147,5 @@ def reservation(request,id):
     return render(request, 'trainer/calendar.html')
 
 
-
-@login_required
-def reservate(request,trainerId,customer_id,date,hour):
-    
-    
-    return render(request, 'trainer/calendar.html')
 
 

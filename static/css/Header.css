@@ -21,27 +21,35 @@ header {
 
 header .navbar {
   width: 100%;
-
   display: flex;
   align-items: center;
 }
+
 header .navigation {
   flex: 8;
-  margin-right: 20px;
+  padding-right: 40px;
   display: flex;
   justify-content: end;
 }
-
 header .brand {
   flex: 1;
+  background-color: antiquewhite;
+  width: 200px;
+  height: 100px;
   margin-left: 20px;
-  color: #fff;
-  font-size: 1.5em;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
 }
+.logo a {
+  cursor: pointer;
+  background-image: url("../Images/FİTUNEXPECTED.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 150px;
+  height: 50px;
+}
+
 header .auth-buttons {
+  padding-left: 20px;
   flex: 2;
 }
 

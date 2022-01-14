@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'feedback',
     'accounts',
     'messaging',
+    'Product',
 
     # 3. Parti uygulamalar
     'crispy_forms',
     'django_cleanup',
     'ckeditor',
     'djstripe',
+    'payment'
 ]
 
 MIDDLEWARE = [
@@ -168,3 +170,13 @@ STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51KEB
 STRIPE_LIVE_MODE = False  # Change to True in production
 DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"  # Get it from the section in the Stripe dashboard where you added the webhook endpoint
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+
+
+
+DEFAULT_FROM_EMAIL = 'gtu.unexpected@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'gtu.unexpected@gmail.com'
+EMAIL_HOST_PASSWORD = 'unexpected.1234'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>Payment</title>
+</head>
+<body>
+
+<div class="wrapper">
+  
+  {% for key, value in form.errors.items %}
+      <p>{{ value }}</p>
+  {% endfor %}
+  
+  <form action="" method="post">{% csrf_token %}
+    
+    {% for field in form %}
+      <div class="field-wrapper">
+        
+        <div class="field-label">
+          {{ field.label_tag }}:
+        </div>
+        
+        <div class="field-field" >
+          {{ field }}
+          {{ field.errors }}
+        </div>
+        
+      </div>
+    {% endfor %}
+    
+    <p id="userid">User ID:{{user}}</p>
+    <p id="trainerid">Trainer ID:{{trainer_id}}</p>
+    
+    <br>
+    <input type="submit" value="Pay 10$" />
+  </form>
+  
+</div>
+
+</body>
+</html>

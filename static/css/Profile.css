@@ -6,8 +6,7 @@
 }
 
 html {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(../Images/uJOcAr.jpg);
+  background: #003567;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -21,10 +20,13 @@ html {
   width: 800px;
   height: 700px;
   position: relative;
-  margin: 75px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 125px;
   background: #fff;
   padding: 5px;
   overflow: hidden;
+  border-radius: 20px;
 }
 .left-side {
   position: relative;
@@ -95,17 +97,19 @@ h6 {
 }
 .right-side .down-inf {
   position: relative;
-  margin-top: 30px;
   height: 400px;
   overflow: hidden;
 }
+.upper-inf .personal-inf {
+  margin-left: 10px;
+}
 .upper-inf .ranking {
+  margin-left: 10px;
   margin-top: 40px;
 }
 .upper-inf .alert-button {
   display: flex;
-  margin-top: 40px;
-  justify-content: space-around;
+  margin-top: 20px;
   align-items: center;
 }
 .alert-button a {
@@ -126,7 +130,10 @@ h6 {
   font-weight: bold;
 }
 .toggle-btn {
-  padding: 10px 30px;
+  color: black;
+  top: 4px;
+  padding: 0 40px;
+  text-decoration: none;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -142,8 +149,8 @@ h6 {
 }
 .about {
   width: 300px;
-  margin-left: 500px;
-  margin-top: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 .contact {
   line-height: 30px;
@@ -153,7 +160,7 @@ h6 {
   line-height: 30px;
 }
 #btn {
-  top: 5;
+  top: 0;
   left: 0;
   position: absolute;
   width: 150px;
