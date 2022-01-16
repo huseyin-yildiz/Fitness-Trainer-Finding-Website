@@ -9,3 +9,11 @@ class MessageForm(forms.ModelForm):
             'topic',
             'message_text',
         ]
+
+class MessagetoTrainerForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = [
+            'topic',
+            'message_text',
+        ]

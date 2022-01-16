@@ -3,3 +3,4 @@ django-ckeditor
 django-crispy-forms
 django-cleanup
 Pillow
+dict2xml
