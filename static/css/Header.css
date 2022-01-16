@@ -33,24 +33,13 @@ header .navigation {
 }
 header .brand {
   flex: 1;
-  background-color: antiquewhite;
-  width: 200px;
-  height: 100px;
   margin-left: 20px;
-}
-.logo a {
-  cursor: pointer;
-  background-image: url("../Images/FİTUNEXPECTED.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  width: 150px;
-  height: 50px;
+  height: 100px;
 }
 
 header .auth-buttons {
   padding-left: 20px;
-  flex: 2;
+  flex: 4;
 }
 
 header .navigation-items {
@@ -73,7 +62,7 @@ header .navigation .navigation-items a:before {
   background: #fff;
   width: 0;
   height: 3px;
-  bottom: 0;
+  bottom: -10px;
   left: 0;
   transition: 0.3s ease;
 }
@@ -99,7 +88,7 @@ header .auth-buttons .navigation-items a:before {
   background: #fff;
   width: 0;
   height: 3px;
-  bottom: 0;
+  bottom: -5px;
   left: 0;
   transition: 0.3s ease;
 }

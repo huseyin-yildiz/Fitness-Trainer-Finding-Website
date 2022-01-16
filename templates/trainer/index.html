@@ -45,13 +45,7 @@
     {% include 'header.html' %}
 
     <div class="profile-list">
-      {% if auth_trainer %}
-      <a
-        href="../../trainer/{{auth_trainer.0.id}}/update"
-        style="color: white; font-weight: bold"
-        >Edit Trainer Profile</a
-      >
-      {% endif %}
+      {% if auth_trainer %} {% endif %}
       <div class="trainer-blocks">
         {% for trainer in trainers %}
         <div class="profile-block">

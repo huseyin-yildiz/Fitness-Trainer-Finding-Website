@@ -4,7 +4,14 @@
 <header>
   <div class="navbar">
     <div class="brand">
-      <div class="logo"><a href=""></a></div>
+      <a href="#">
+        <img
+          src="/static/Images/FİTUNEXPECTED.png"
+          alt="Girl in a jacket"
+          width="150px"
+          height="75px"
+        />
+      </a>
     </div>
     <div class="auth-buttons">
       <div class="navigation-items">
@@ -16,14 +23,27 @@
           >Sign Up</a
         >
         {% else %}
-        <a style="font-weight: bold" href="{% url 'accounts:profile' %}"
-          >Profile</a
+
+        <a
+          href="{% url 'accounts:profile' %}"
+          style="font-size: 24px"
+          class="far"
+          >&#xf2bd;</a
         >
+        <a style="font-weight: bold" href="{% url 'messaging:index' %}">
+          <i style="font-size: 24px" class="fa">&#xf0e0;</i>
+        </a>
+        <a style="font-weight: bold" href="#">
+          <i style="font-size: 24px" class="fa">&#xf030;</i>
+        </a>
+        <a style="font-weight: bold" href="#">
+          <i style="font-size: 24px" class="fa">&#xf073;</i>
+        </a>
+
         <a style="font-weight: bold" href="{% url 'accounts:logout' %}"
           >Log Out</a
         >
         {% endif %}
-        <a href="#" style="font-size: 24px" class="far">&#xf2bd;</a>
       </div>
     </div>
     <div class="menu-btn"></div>
@@ -33,10 +53,11 @@
         <a style="font-weight: bold" href="{% url 'trainer:index' %}"
           >Trainers</a
         >
-        <a style="font-weight: bold" href="{% url 'messaging:index' %}">Messaging</a>
+
         <a style="font-weight: bold" href="{% url 'feedback:index' %}"
           >Feedback</a
         >
+        <a style="font-weight: bold" href="#">About Us</a>
       </div>
     </div>
   </div>
