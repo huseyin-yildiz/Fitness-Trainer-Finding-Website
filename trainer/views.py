@@ -7,6 +7,7 @@ from django.contrib import messages
 from dict2xml import dict2xml
 import datetime
 from django.contrib.auth.decorators import login_required
+from Product.models import Product
 
 
 def trainer_index(request):
@@ -20,8 +21,12 @@ def trainer_index(request):
 
 def trainer_detail(request, id):
     trainer = get_object_or_404(Trainer, id=id)
+    product = None
+    product = Product.objects.all().first()
 
-    form= CommentForm(request.POST or None )
+    disc_price = product.price * ((100-product.discount_rate) / 100)
+
+    form = CommentForm(request.POST or None )
     if form.is_valid():
         comment=form.save(commit=False)
         comment.trainer = trainer
@@ -29,8 +34,10 @@ def trainer_detail(request, id):
         return HttpResponseRedirect(trainer.get_absolute_url())
 
     context= {
-        'trainer':trainer,
-        'form':form,
+        'trainer': trainer,
+        'form': form,
+        'product': product,
+        'disc_price': disc_price,
     }
     return render(request,'trainer/detail.html',context)
 

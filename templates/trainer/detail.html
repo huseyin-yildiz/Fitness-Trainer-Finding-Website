@@ -151,6 +151,22 @@
 
                 <p><b>Birth Date: </b>{{trainer.Birth_Date}}</p>
               </div>
+              <div class="basic">
+                <h6>Payment Information</h6>
+
+                <p>
+                  <b>Monthly Price: </b>
+                  {% if product %}
+                    {% if product.discount_rate > 0 %}
+                      {{ disc_price }} TRY (%{{product.discount_rate}} Discount)
+                    {% else %}
+                      {{ product.price }} TRY
+                    {% endif %}
+
+                  {% endif %}
+                </p>
+
+              </div>
             </div>
           </form>
         </div>
