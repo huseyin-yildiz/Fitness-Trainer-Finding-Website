@@ -29,25 +29,22 @@ var indexMonth = month;
 var inputDate = $(this).data();
 
 // ------ functions control -------
-
 // Onclick hour cell
-$(document).ready(function () {
-  $(".hour_cell").click(function () {
-    var th = $(this).data().hours.slice(0, 2);
+$(document).on("click", ".hour_cell", function () {
+  var th = $(this).data().hours.slice(0, 2);
 
-    for (var i = 0; i < counterReservedHours; i++) {
-      if (i + 1 == counterReservedHours && reservedHours[i] != th) {
-        counterReservedHours++;
-        reservedHours[i] = th;
-        break;
-      } else if (reservedHours[i] == th) {
-        reservedHours.splice(reservedHours.indexOf(th), 1);
-        counterReservedHours--;
-        break;
-      }
+  for (var i = 0; i < counterReservedHours; i++) {
+    if (i + 1 == counterReservedHours && reservedHours[i] != th) {
+      counterReservedHours++;
+      reservedHours[i] = th;
+      break;
+    } else if (reservedHours[i] == th) {
+      reservedHours.splice(reservedHours.indexOf(th), 1);
+      counterReservedHours--;
+      break;
     }
-    $(this).toggleClass("isSelected");
-  });
+  }
+  $(this).toggleClass("isSelected");
 });
 
 dataCel.on("click", function () {
@@ -58,7 +55,7 @@ dataCel.on("click", function () {
   $(".c-aside__num").text(thisDay);
   $(".c-aside__month").text(monthText[thisMonth - 1]);
   $(".c-aside__year").text(dateObj.getUTCFullYear() + indexYear);
-  xhttp();
+  xhttp(thisDay, thisMonth);
 
   dataCel.removeClass("isSelected");
   thisEl.addClass("isSelected");
@@ -183,7 +180,7 @@ $(".c-aside__num").text(day);
 $(".c-aside__month").text(monthText[month - 1]);
 $(".c-aside__year").text(year);
 
-function xhttp() {
+function xhttp(day, month) {
   // Create an XMLHttpRequest object
   const xhttp = new XMLHttpRequest();
   var hourArray;
@@ -194,9 +191,150 @@ function xhttp() {
     parser = new DOMParser();
     xmlDoc = parser.parseFromString(text, "text/xml");
     hourArray = xmlDoc.getElementsByTagName("item");
+
     booking_hours(hourArray);
   };
   // Send a request
-  xhttp.open("GET", "test.xml");
+  //console.log(month + "/" + day + "/" + year);
+  xhttp.open("GET", "hours.xml");
+  //xhttp.open("GET","http://127.0.0.1:8000/trainer/reservationInfo/3/" +year +"-" +month +"-" +day +"/");
   xhttp.send();
+}
+
+function booking_hours(hourArray) {
+  console.log("heyyyy");
+
+  var table;
+  for (var i = 0; i < hourArray.length; i++) {
+    if (parseInt(hourArray[i].childNodes[0].nodeValue) < 9)
+      table +=
+        "<div data-hours='0" +
+        hourArray[i].childNodes[0].nodeValue +
+        ".00-0" +
+        (parseInt(hourArray[i].childNodes[0].nodeValue) + 1) +
+        ".00' class='hour_cell'>" +
+        "<p>" +
+        "0" +
+        hourArray[i].childNodes[0].nodeValue +
+        ".00 - 0" +
+        (parseInt(hourArray[i].childNodes[0].nodeValue) + 1) +
+        ".00" +
+        "</p></div>";
+    else if (parseInt(hourArray[i].childNodes[0].nodeValue) == 9) {
+      table +=
+        "<div data-hours='0" +
+        hourArray[i].childNodes[0].nodeValue +
+        ".00-0" +
+        (parseInt(hourArray[i].childNodes[0].nodeValue) + 1) +
+        ".00' class='hour_cell'>" +
+        "<p>" +
+        "0" +
+        hourArray[i].childNodes[0].nodeValue +
+        ".00 - " +
+        (parseInt(hourArray[i].childNodes[0].nodeValue) + 1) +
+        ".00" +
+        "</p></div>";
+    } else {
+      table +=
+        "<div data-hours='" +
+        hourArray[i].childNodes[0].nodeValue +
+        ".00-" +
+        (parseInt(hourArray[i].childNodes[0].nodeValue) + 1) +
+        ".00' class='hour_cell'>" +
+        "<p>" +
+        hourArray[i].childNodes[0].nodeValue +
+        ".00 - " +
+        (parseInt(hourArray[i].childNodes[0].nodeValue) + 1) +
+        ".00" +
+        "</p></div>";
+    }
+  }
+
+  document.getElementById("hoursList").innerHTML = table.slice(9);
+}
+
+// fill the month table with column headings
+function day_title(day_name) {
+  document.write("<div class='c-cal__col'>" + day_name + "</div>");
+}
+// fills the month table with numbers
+function fill_table(month, month_length, indexMonth) {
+  day = 1;
+  // begin the new month table
+  document.write("<div class='c-main c-main-" + indexMonth + "'>");
+  //document.write("<b>"+month+" "+year+"</b>")
+
+  // column headings
+  document.write("<div class='c-cal__row'>");
+  day_title("Sun");
+  day_title("Mon");
+  day_title("Tue");
+  day_title("Wed");
+  day_title("Thu");
+  day_title("Fri");
+  day_title("Sat");
+  document.write("</div>");
+
+  // pad cells before first day of month
+  document.write("<div class='c-cal__row'>");
+  for (var i = 1; i < start_day; i++) {
+    if (start_day > 7) {
+    } else {
+      document.write("<div class='c-cal__cel'></div>");
+    }
+  }
+
+  // fill the first week of days
+  for (var i = start_day; i < 8; i++) {
+    document.write(
+      "<div data-day='2017-" +
+        indexMonth +
+        "-0" +
+        day +
+        "'class='c-cal__cel'><p>" +
+        day +
+        "</p></div>"
+    );
+    day++;
+  }
+  document.write("</div>");
+
+  // fill the remaining weeks
+  while (day <= month_length) {
+    document.write("<div class='c-cal__row'>");
+    for (var i = 1; i <= 7 && day <= month_length; i++) {
+      if (day >= 1 && day <= 9) {
+        document.write(
+          "<div data-day='" +
+            year +
+            "-" +
+            indexMonth +
+            "-0" +
+            day +
+            "'class='c-cal__cel'><p>" +
+            day +
+            "</p></div>"
+        );
+        day++;
+      } else {
+        document.write(
+          "<div data-day='" +
+            year +
+            "-" +
+            indexMonth +
+            "-" +
+            day +
+            "' class='c-cal__cel'><p>" +
+            day +
+            "</p></div>"
+        );
+        day++;
+      }
+    }
+    document.write("</div>");
+    // the first day of the next month
+    start_day = i;
+  }
+
+  document.write("</div>");
 }
