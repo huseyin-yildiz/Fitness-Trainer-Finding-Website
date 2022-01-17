@@ -175,7 +175,6 @@ DJSTRIPE_USE_NATIVE_JSONFIELD = True
 
 
 DEFAULT_FROM_EMAIL = 'gtu.unexpected@gmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'gtu.unexpected@gmail.com'
 EMAIL_HOST_PASSWORD = 'unexpected.1234'
