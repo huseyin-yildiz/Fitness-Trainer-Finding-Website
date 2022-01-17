@@ -34,6 +34,9 @@ class Trainer(models.Model):
     def get_absolute_url(self):
         return reverse('trainer:detail', kwargs={'id': self.id})
 
+    def get_send_message_url(self):
+        return reverse('messaging:send_message', kwargs={'trainer_id': self.id})
+
 class Comment(models.Model):
     trainer = models.ForeignKey('trainer.Trainer', related_name='comments', on_delete=models.CASCADE, verbose_name='Gönderi')
     name = models.CharField(max_length=200, verbose_name='Başlık')
