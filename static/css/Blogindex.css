@@ -22,6 +22,7 @@ body {
 
 .best-section {
   margin: 0 auto;
+  margin-top: 150px;
   max-width: 1140px;
   height: 550px;
   display: flex;
@@ -78,6 +79,30 @@ button {
   height: 132px;
 }
 .nearby-section .container .left-side h3 {
+  padding-top: 15px;
+}
+
+.nearby-section .container .left-side-2 {
+  width: 0px;
+  overflow: hidden;
+}
+.nearby-section .container .left-side-2 img {
+  width: 540px;
+  height: 132px;
+}
+.nearby-section .container .left-side-2 h3 {
+  padding-top: 15px;
+}
+
+.nearby-section .container .left-side-3 {
+  width: 0px;
+  overflow: hidden;
+}
+.nearby-section .container .left-side-3 img {
+  width: 540px;
+  height: 132px;
+}
+.nearby-section .container .left-side-3 h3 {
   padding-top: 15px;
 }
 
