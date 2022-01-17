@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/Link.css' %}" />
     <link rel="stylesheet" href="{% static 'css/Blogheader.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/Blogfooter.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/blogindex.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/Blogindex.css' %}"/>
 
     <link
       rel="stylesheet"
@@ -155,56 +155,6 @@
     <div class="category-posts-section">
       <div class="container">
         <div class="left-side">
-          <h3>
-            <i style="font-size: 14px; opacity: 0.6" class="fas">&#xf053;</i>
-            {{ mycategory.name }}
-            <i style="font-size: 14px; opacity: 0.6" class="fas">&#xf054;</i>
-            <br/><br/>
-          </h3>
-          <hr style="margin-top: -20px; width: 700px" />
-
-          {% for postc in post_by_category %}
-              <div class="block">
-              <div class="block-left-side">
-                <h4>
-                  <a class="link-flash" href="{{postc.get_absolute_url}}">{{ postc.title }}</a>
-                </h4>
-                <p>{{ postc.content|safe|linebreaks|truncatechars:230 }}</p>
-                <p class="post-detail">{{ posts.4.user.get_full_name}}<br />{{ posts.4.publishing_date|timesince }}</p>
-              </div>
-                {% if postc.image %}
-                  <img src="{{ postc.image.url }}" alt="" />
-                {% endif %}
-            </div>
-          {% endfor %}
-        </div>
-        <div class="left-side-2">
-          <h3>
-            <i style="font-size: 14px; opacity: 0.6" class="fas">&#xf053;</i>
-            {{ mycategory.name }}
-            <i style="font-size: 14px; opacity: 0.6" class="fas">&#xf054;</i>
-            <br/><br/>
-          </h3>
-          <hr style="margin-top: -20px; width: 700px" />
-
-          {% for postc in post_by_category %}
-              <div class="block">
-              <div class="block-left-side">
-                <h4>
-                  <a class="link-flash" href="{{postc.get_absolute_url}}">{{ postc.title }}</a>
-                </h4>
-                <p>{{ postc.content|safe|linebreaks|truncatechars:230 }}</p>
-                <p class="post-detail">{{ posts.4.user.get_full_name}}<br />{{ posts.4.publishing_date|timesince }}</p>
-              </div>
-                {% if postc.image %}
-                  <img src="{{ postc.image.url }}" alt="" />
-                {% endif %}
-            </div>
-          {% endfor %}
-
-
-        </div>
-        <div class="left-side-3">
           <h3>
             <i style="font-size: 14px; opacity: 0.6" class="fas">&#xf053;</i>
             {{ mycategory.name }}
