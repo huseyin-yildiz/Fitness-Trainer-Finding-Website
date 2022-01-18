@@ -8,7 +8,8 @@ from dict2xml import dict2xml
 import datetime
 from django.contrib.auth.decorators import login_required
 from Product.models import Product
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 def trainer_index(request):
     print("here")

@@ -5,6 +5,9 @@ from django.template import RequestContext
 from payment.models import Sale
 from payment.forms import SalePaymentForm
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 def charge(request,trainer_id):
     if request.method == "POST":

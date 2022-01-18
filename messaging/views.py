@@ -3,7 +3,8 @@ from trainer.models import Trainer
 from .models import Message
 from django.contrib.auth.models import User
 from .forms import MessageForm, MessagetoTrainerForm
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 def message_view(request):
 

@@ -5,7 +5,8 @@ from django.contrib import messages
 from django.utils.text import slugify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 def post_index(request):
     post_list = Post.objects.all()
