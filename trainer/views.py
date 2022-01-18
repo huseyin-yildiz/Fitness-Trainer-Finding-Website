@@ -119,6 +119,7 @@ def create_meeting(meeting_topic, year, month, day, hour, minute):
     api_key = "2RfY60-aRFuYxApKuGpikw"
     api_secret = "7XdNSHl7FWlPRdXPRNPSZrz2Op31dPloWRi5"
 
+    ## Generate token
     headers = {"alg": "HS256", "typ": "JWT"}
     payload = {"iss": api_key, "exp": rounded_off_exp_time}
     encoded_jwt = jwt.encode(payload, api_secret, algorithm="HS256")
@@ -126,10 +127,25 @@ def create_meeting(meeting_topic, year, month, day, hour, minute):
     url = "https://api.zoom.us/v2/users/{}/meetings".format(email)
     date = datetime.datetime(year, month, day, hour, minute).strftime("%Y-%m-%dT%H:%M:%SZ")
     print(date)
-    obj = {"topic": meeting_topic, "start_time": date, "duration": 30, "password": "12345", "timezone": "Europe/Istanbul"}
+    obj = {"topic": meeting_topic,
+           "start_time": date,
+           "duration": 30,
+           "password": "12345",
+           "timezone": "Europe/Istanbul"
+           }
     header = {"authorization": "Bearer {}".format(encoded_jwt)}
-    create_meeting = requests.post(url, json=obj, headers=header)
-    print(create_meeting.text)
+    r = requests.post(url, json=obj, headers=header)
+
+    ## Print and return join URL & password
+    inf = json.loads(r.text)
+    join_URL = inf["join_url"]
+    meetingPassword = inf["password"]
+
+    print(
+        f'\n here is your zoom meeting link {join_URL} and your \
+            password: "{meetingPassword}"\n')
+
+    return join_URL
 
 
 def free__lectures(trainerId, date):
