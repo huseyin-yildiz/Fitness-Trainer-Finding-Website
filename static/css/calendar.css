@@ -50,6 +50,10 @@
 /* VARIABLES ================================================*/
 /* RESPONSIVE ================================================*/
 /* ===========================================================*/
+.make-blur {
+  filter: blur(10px);
+  transition: 0.5s;
+}
 
 data body {
   position: relative;
@@ -110,11 +114,11 @@ a {
 }
 /* STYLE ===========================================================*/
 header {
-  position: fixed;
+  position: relative;
   height: 80px;
   width: 100%;
-  z-index: 50;
   background: #003567;
+  transition: 0.5s;
 }
 header > .wrapper {
   display: flex;
@@ -126,6 +130,7 @@ header > .wrapper {
   color: #ffffff;
   letter-spacing: 2px;
   font-size: 13px;
+  transition: 0.5s;
 }
 header > .wrapper a {
   color: #ffffff;
@@ -241,7 +246,6 @@ header > .wrapper a {
   padding: 9px 12px;
   background-color: #004b8f;
   cursor: pointer;
-  z-index: 10;
   box-sizing: border-box;
   transform: translatey(-50%);
   border-radius: 50%;
@@ -300,7 +304,6 @@ header > .wrapper a {
 }
 .c-calendar {
   height: 700px;
-  padding-top: 80px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -464,7 +467,7 @@ header > .wrapper a {
   background-color: #004b8f !important;
 }
 .hour_cell.isSelected {
-  background-color: rgb(201, 191, 191) !important;
+  background-color: rgb(118, 100, 100) !important;
 }
 .hour_cell::before {
   content: "";

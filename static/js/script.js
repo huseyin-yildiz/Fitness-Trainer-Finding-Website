@@ -6,6 +6,8 @@ var dateObj = new Date();
 var month = dateObj.getUTCMonth() + 1;
 var day = dateObj.getUTCDate();
 var year = dateObj.getUTCFullYear();
+var activeDay = null;
+var activeMonth = null;
 
 var reservedHours = [];
 var counterReservedHours = 1;
@@ -46,12 +48,44 @@ $(document).on("click", ".hour_cell", function () {
   }
   $(this).toggleClass("isSelected");
 });
+function bookFunction() {
+  console.log("worked");
+  if (activeDay != null) {
+    $(".wrapper-2").addClass("wrapper-2-active");
+    $(".wrapper").addClass("make-blur");
+    $("header").addClass("make-blur");
+
+    document.getElementById("id_thedate").value =
+      year + "-" + activeMonth + "-" + activeDay;
+
+    document.getElementById("id_hour").value = 12;
+    console.log();
+
+    document.getElementById("id_trainer_id").value = document
+      .getElementById("trainerid")
+      .textContent.slice(11);
+
+    document.getElementById("id_customer_id").value = document
+      .getElementById("userid")
+      .textContent.slice(8);
+  }
+}
+window.addEventListener("load", () => {
+  document.querySelector("#close").addEventListener("click", (e) => {
+    $(".wrapper-2").removeClass("wrapper-2-active");
+    $(".wrapper").removeClass("make-blur");
+    $("header").removeClass("make-blur");
+
+    document.getElementById("id_thedate").value = NULL;
+  });
+});
 
 dataCel.on("click", function () {
   var thisEl = $(this);
   var thisDay = $(this).attr("data-day").slice(8);
   var thisMonth = $(this).attr("data-day").slice(5, 7);
-
+  activeDay = thisDay;
+  activeMonth = thisMonth;
   $(".c-aside__num").text(thisDay);
   $(".c-aside__month").text(monthText[thisMonth - 1]);
   $(".c-aside__year").text(dateObj.getUTCFullYear() + indexYear);
@@ -172,9 +206,11 @@ buttonsYearPaginator("#prevYear", ".c-paginator__year", true, false);
 //launch function to set the current month
 moveNext(indexMonth - 1, false);
 //fill the year
+
 document.getElementById("firstY").innerHTML = dateObj.getUTCFullYear();
 document.getElementById("secondY").innerHTML = dateObj.getUTCFullYear() + 1;
 document.getElementById("thirdY").innerHTML = dateObj.getUTCFullYear() + 2;
+
 //fill the sidebar with current day
 $(".c-aside__num").text(day);
 $(".c-aside__month").text(monthText[month - 1]);
@@ -194,16 +230,20 @@ function xhttp(day, month) {
 
     booking_hours(hourArray);
   };
-  // Send a request
-  //console.log(month + "/" + day + "/" + year);
-  xhttp.open("GET", "hours.xml");
-  //xhttp.open("GET","http://127.0.0.1:8000/trainer/reservationInfo/3/" +year +"-" +month +"-" +day +"/");
+  // Send a request-
+  xhttp.open(
+    "GET",
+    "http://127.0.0.1:8000/trainer/reservationInfo/3/" +
+      year +
+      "-" +
+      month +
+      "-" +
+      day +
+      "/"
+  );
   xhttp.send();
 }
-
 function booking_hours(hourArray) {
-  console.log("heyyyy");
-
   var table;
   for (var i = 0; i < hourArray.length; i++) {
     if (parseInt(hourArray[i].childNodes[0].nodeValue) < 9)
@@ -251,90 +291,4 @@ function booking_hours(hourArray) {
   }
 
   document.getElementById("hoursList").innerHTML = table.slice(9);
-}
-
-// fill the month table with column headings
-function day_title(day_name) {
-  document.write("<div class='c-cal__col'>" + day_name + "</div>");
-}
-// fills the month table with numbers
-function fill_table(month, month_length, indexMonth) {
-  day = 1;
-  // begin the new month table
-  document.write("<div class='c-main c-main-" + indexMonth + "'>");
-  //document.write("<b>"+month+" "+year+"</b>")
-
-  // column headings
-  document.write("<div class='c-cal__row'>");
-  day_title("Sun");
-  day_title("Mon");
-  day_title("Tue");
-  day_title("Wed");
-  day_title("Thu");
-  day_title("Fri");
-  day_title("Sat");
-  document.write("</div>");
-
-  // pad cells before first day of month
-  document.write("<div class='c-cal__row'>");
-  for (var i = 1; i < start_day; i++) {
-    if (start_day > 7) {
-    } else {
-      document.write("<div class='c-cal__cel'></div>");
-    }
-  }
-
-  // fill the first week of days
-  for (var i = start_day; i < 8; i++) {
-    document.write(
-      "<div data-day='2017-" +
-        indexMonth +
-        "-0" +
-        day +
-        "'class='c-cal__cel'><p>" +
-        day +
-        "</p></div>"
-    );
-    day++;
-  }
-  document.write("</div>");
-
-  // fill the remaining weeks
-  while (day <= month_length) {
-    document.write("<div class='c-cal__row'>");
-    for (var i = 1; i <= 7 && day <= month_length; i++) {
-      if (day >= 1 && day <= 9) {
-        document.write(
-          "<div data-day='" +
-            year +
-            "-" +
-            indexMonth +
-            "-0" +
-            day +
-            "'class='c-cal__cel'><p>" +
-            day +
-            "</p></div>"
-        );
-        day++;
-      } else {
-        document.write(
-          "<div data-day='" +
-            year +
-            "-" +
-            indexMonth +
-            "-" +
-            day +
-            "' class='c-cal__cel'><p>" +
-            day +
-            "</p></div>"
-        );
-        day++;
-      }
-    }
-    document.write("</div>");
-    // the first day of the next month
-    start_day = i;
-  }
-
-  document.write("</div>");
 }
