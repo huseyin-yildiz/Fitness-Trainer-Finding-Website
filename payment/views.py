@@ -10,11 +10,14 @@ from django.conf import settings
 
 
 def charge(request,trainer_id):
+    if not request.user.is_authenticated:
+        return Http404()
+
     if request.method == "POST":
         form = SalePaymentForm(request.POST)
         
         if form.is_valid(): # charges the card
-            return HttpResponse("Success! The payment is completed successfully")
+            return render(request, 'success.html')
         print("valid:",form.is_valid())
     else:
         form = SalePaymentForm()
@@ -27,3 +30,5 @@ def charge(request,trainer_id):
 
     return render(request, "payment/charge.html", 
                         context)
+
+                        

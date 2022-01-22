@@ -14,7 +14,7 @@ import jwt
 import datetime
 import requests
 import json
-
+import xml.etree.ElementTree as ET
 
 def trainer_index(request):
     print("here")
@@ -111,41 +111,7 @@ def is_free_at(trainerId, date, hour):
         return False
 
 
-def create_meeting(meeting_topic, year, month, day, hour, minute):
-    time_now = datetime.datetime.now()
-    expiration_time = time_now + datetime.timedelta(seconds=300)
-    rounded_off_exp_time = round(expiration_time.timestamp())
 
-    api_key = "2RfY60-aRFuYxApKuGpikw"
-    api_secret = "7XdNSHl7FWlPRdXPRNPSZrz2Op31dPloWRi5"
-
-    ## Generate token
-    headers = {"alg": "HS256", "typ": "JWT"}
-    payload = {"iss": api_key, "exp": rounded_off_exp_time}
-    encoded_jwt = jwt.encode(payload, api_secret, algorithm="HS256")
-    email = "turkoaygun@gmail.com"
-    url = "https://api.zoom.us/v2/users/{}/meetings".format(email)
-    date = datetime.datetime(year, month, day, hour, minute).strftime("%Y-%m-%dT%H:%M:%SZ")
-    print(date)
-    obj = {"topic": meeting_topic,
-           "start_time": date,
-           "duration": 30,
-           "password": "12345",
-           "timezone": "Europe/Istanbul"
-           }
-    header = {"authorization": "Bearer {}".format(encoded_jwt)}
-    r = requests.post(url, json=obj, headers=header)
-
-    ## Print and return join URL & password
-    inf = json.loads(r.text)
-    join_URL = inf["join_url"]
-    meetingPassword = inf["password"]
-
-    print(
-        f'\n here is your zoom meeting link {join_URL} and your \
-            password: "{meetingPassword}"\n')
-
-    return join_URL
 
 
 def free__lectures(trainerId, date):
@@ -174,7 +140,25 @@ def free__lectures(trainerId, date):
 
     return free__lecs
 
-
+def create_xml(list):
+  
+        # we make root element
+        usrconfig = ET.Element("hours")
+  
+        # create sub element
+        usrconfig = ET.SubElement(usrconfig, "hours")
+  
+        # insert list element into sub elements
+        for user in range(len( list)):
+  
+                usr = ET.SubElement(usrconfig, "item")
+                usr.text = str(list[user])
+  
+        tree = ET.ElementTree(usrconfig)
+        
+        return  ET.tostring(usrconfig, encoding="unicode")
+        # write the tree into an XML file
+        #tree.write("Output.xml", encoding ='utf-8', xml_declaration = True)
 # Reservation part
 
 
@@ -185,7 +169,7 @@ def reservationInfo(request, id, date):
     data = {"free_lecs": free_lecs
             }
 
-    xml = dict2xml(data)
+    xml = create_xml(free_lecs)
     print(xml)
 
     return HttpResponse(str(xml))

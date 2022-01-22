@@ -1,10 +1,16 @@
-from datetime import date, datetime
+from datetime import date
+import datetime
 from calendar import monthrange
-
+import jwt
 from django import forms
 from django.contrib.auth.models import User
 from payment.models import Sale
 from trainer.models import CalendarEvent, Reservation
+import requests
+import json
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 class CreditCardField(forms.IntegerField):
     def clean(self, value):
@@ -81,11 +87,11 @@ class SalePaymentForm(forms.Form):
     cvc = forms.IntegerField(required=True, label="CCV Number",
         max_value=9999, widget=forms.TextInput(attrs={'size': '4'}))
 
-    thedate = forms.DateField(required=True, label="Date",initial=date.today)
-    hour = forms.IntegerField(required=True, label="Hour")
-    trainer_id = forms.IntegerField(required=True, label="trainer_id")
-    customer_id = forms.IntegerField(required=True, label="customer_id")
-    is_online = forms.BooleanField(required=True, label="is_online")
+    thedate = forms.DateField(label="",required=True,initial=date.today,widget=forms.HiddenInput())
+    hour = forms.IntegerField(label="",required=True,widget=forms.HiddenInput())
+    trainer_id = forms.IntegerField(label="",required=True, widget=forms.HiddenInput())
+    customer_id = forms.IntegerField(label="",required=True,widget=forms.HiddenInput())
+    is_online = forms.BooleanField(required=False, label="is_online")
     address = forms.CharField(required=False)
 
     
@@ -123,18 +129,55 @@ class SalePaymentForm(forms.Form):
                 raise forms.ValidationError("Error: %s" % instance.message)
             else:
                 instance.save()
+                print("reservating..")
                 reservate(trainer_id,customer_id,thedate,hour)
+                print("reservatedd..")
                 # we were successful! do whatever you will here... 
                 # perhaps you'd like to send an email...
                 pass
         
         return cleaned
     
+def create_meeting(meeting_topic, year, month, day, hour, minute):
+    time_now = datetime.datetime.now()
+    expiration_time = time_now + datetime.timedelta(seconds=300)
+    rounded_off_exp_time = round(expiration_time.timestamp())
+
+    api_key = "2RfY60-aRFuYxApKuGpikw"
+    api_secret = "7XdNSHl7FWlPRdXPRNPSZrz2Op31dPloWRi5"
+
+    ## Generate token
+    headers = {"alg": "HS256", "typ": "JWT"}
+    payload = {"iss": api_key, "exp": rounded_off_exp_time}
+    encoded_jwt = jwt.encode(payload, api_secret, algorithm="HS256")
+    email = "turkoaygun@gmail.com"
+    url = "https://api.zoom.us/v2/users/{}/meetings".format(email)
+    thedate = datetime.datetime(year, month, day, hour, minute).strftime("%Y-%m-%dT%H:%M:%SZ")
+    print(thedate)
+    obj = {"topic": meeting_topic,
+           "start_time": thedate,
+           "duration": 60,
+           "password": "12345",
+           "timezone": "Europe/Istanbul"
+           }
+    header = {"authorization": "Bearer {}".format(encoded_jwt)}
+    r = requests.post(url, json=obj, headers=header)
+
+    ## Print and return join URL & password
+    inf = json.loads(r.text)
+    join_URL = inf["join_url"]
+    meetingPassword = inf["password"]
+
+    print(
+        f'\n here is your zoom meeting link {join_URL} and your \
+            password: "{meetingPassword}"\n')
+    print("date:: ",thedate)
+
+    return join_URL
     
 
 
 def reservate(trainerId,customer_id,daydate,hour):
-
 
     dayofweek = daydate.weekday()
     
@@ -142,9 +185,16 @@ def reservate(trainerId,customer_id,daydate,hour):
     print(daydate.day)
     event = CalendarEvent.objects.filter(day_of_week=dayofweek,trainer=trainerId,start_time=hour ).first()
     trainer = event.trainer
-    
 
     Reservation.objects. create(event=event,trainer=trainer,customer=customer,date_time=daydate)
+    print ("hour::  ",hour)
+    meeting_url = create_meeting("Toplanti", daydate.year, daydate.month, daydate.day, hour-3, 0)
 
-
+    send_mail(
+    'FitUnexpected Meeting Link',
+    f'\n here is your zoom meeting link {meeting_url} \nThe Team Unexpected.',
+    'gtu.unexpected@gmail.com',
+    [customer.email],
+    fail_silently=False,
+    )
     

@@ -5,3 +5,4 @@ django-cleanup
 Pillow
 dict2xml
 pyjwt
+dj-stripe

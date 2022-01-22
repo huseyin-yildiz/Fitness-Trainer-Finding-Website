@@ -13,7 +13,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"
     />
-    <link rel="stylesheet" href="{% static 'css/calendar.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/cal.css'%}" />
     <link rel="stylesheet" href="{% static 'css/Charge.css'%}" />
 
     <link rel="stylesheet" href="{% static 'css/book_button.css' %}" />
@@ -220,14 +220,14 @@
       <form action="" method="post">
         {% csrf_token %} {% for field in form %}
         <div class="field-wrapper">
-          <div class="field-label">{{ field.label_tag }}:</div>
+          <div class="field-label">{{ field.label_tag }}</div>
 
           <div class="field-field">{{ field }} {{ field.errors }}</div>
         </div>
         {% endfor %}
 
-        <p id="userid">User ID:{{user}}</p>
-        <p id="trainerid">Trainer ID:{{trainer_id}}</p>
+        <p hidden id="userid">User ID:{{user}}</p>
+        <p hidden id="trainerid">Trainer ID:{{trainer_id}}</p>
 
         <br />
         <input type="submit" value="Pay 10$" />
@@ -235,7 +235,7 @@
     </div>
 
     <!-- partial -->
-    <script type="text/javascript" src="{% static 'js/Script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/sc.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/2.1.6/jquery.cycle2.core.min.js"></script>
   </body>
